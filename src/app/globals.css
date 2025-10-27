@@ -178,8 +178,31 @@ body {
 .modal-backdrop-custom {
   position: absolute;
   inset: 0;
-  background: rgba(0,0,0,0.45);
+  /* background: rgba(0,0,0,0.45); */
 }
+
+/* Fix faint Bootstrap modal in Next.js */
+.modal-backdrop.show {
+  opacity: 0.4 !important; /* Make background slightly dim */
+  z-index: 1040 !important;
+}
+
+.modal {
+  z-index: 1050 !important;
+}
+
+/* Ensure modal is fully visible */
+.modal-dialog {
+  margin: 1.75rem auto;
+  max-width: 600px;
+}
+
+@media (min-width: 992px) {
+  .modal-dialog {
+    margin-top: 3rem !important; /* Raise the modal a bit on desktop */
+  }
+}
+
 
 /* mobile: modal uses full-screen dialog for better UX */
 @media (max-width: 576px) {

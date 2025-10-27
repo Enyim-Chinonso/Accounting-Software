@@ -12,21 +12,19 @@ export default function AddTransactionModal({ onClose, onAdd }) {
     type: "Credit",
     status: "Pending",
   });
+
   const modalRef = useRef(null);
 
   useEffect(() => {
-    // lock body scroll while modal is open
+    // lock scroll
     const originalOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
 
-    // entrance animation
-    const ctx = gsap.context(() => {
-      gsap.from(modalRef.current, { y: 20, opacity: 0, duration: 0.35, ease: "power2.out" });
-    }, modalRef);
+    // animation
+    gsap.from(modalRef.current, { y: 20, opacity: 0, duration: 0.35, ease: "power2.out" });
 
     return () => {
       document.body.style.overflow = originalOverflow;
-      ctx.revert();
     };
   }, []);
 
@@ -37,13 +35,14 @@ export default function AddTransactionModal({ onClose, onAdd }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Basic validation
+
     if (!formData.date || !formData.description || !formData.amount) {
-      alert("Please fill date, description and amount.");
+      alert("Please fill in Date, Description, and Amount.");
       return;
     }
+
     onAdd(formData);
-    // reset (optional)
+
     setFormData({
       date: "",
       description: "",
@@ -56,102 +55,127 @@ export default function AddTransactionModal({ onClose, onAdd }) {
 
   return (
     <div
-      className="transaction-modal-wrapper position-fixed inset-0 d-flex align-items-center justify-content-center"
-      style={{ zIndex: 1400 }}
+      className="modal fade show"
+      tabIndex="-1"
       role="dialog"
-      aria-modal="true"
+      style={{
+        display: "block",
+        background: "rgba(0, 0, 0, 0.5)",
+        zIndex: 1050,
+      }}
     >
-      {/* Overlay */}
-      <div
-        className="modal-backdrop-custom position-absolute inset-0"
-        onClick={onClose}
-        aria-hidden="true"
-      />
-
-      {/* Modal box */}
       <div
         ref={modalRef}
         className="modal-dialog modal-dialog-centered modal-lg"
-        style={{ maxWidth: 720, zIndex: 1500 }}
+        role="document"
+        style={{ maxWidth: "500px", height: "auto" }}
       >
-        <div className="modal-content">
-          <div className="modal-header">
-            <h5 className="modal-title">Add Transaction</h5>
-            <button type="button" className="btn-close" onClick={onClose} aria-label="Close" />
+        <div
+          className="modal-content shadow-lg border-0 rounded-3"
+          style={{
+            maxHeight: "90vh",
+            overflowY: "auto", // scrollable if tall
+          }}
+        >
+          {/* Header */}
+          <div className="modal-header bg-primary text-white sticky-top">
+            <h5 className="modal-title">Add New Transaction</h5>
+            <button
+              type="button"
+              className="btn-close btn-close-white"
+              onClick={onClose}
+            ></button>
           </div>
 
+          {/* Form */}
           <form onSubmit={handleSubmit}>
             <div className="modal-body">
-              <div className="row g-3">
-                <div className="col-12 col-md-6">
-                  <label className="form-label">Date</label>
-                  <input
-                    type="date"
-                    name="date"
-                    className="form-control"
-                    value={formData.date}
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
+              <div className="mb-3">
+                <label className="form-label fw-semibold">Date</label>
+                <input
+                  type="date"
+                  className="form-control"
+                  name="date"
+                  value={formData.date}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
 
-                <div className="col-12 col-md-6">
-                  <label className="form-label">Amount</label>
+              <div className="mb-3">
+                <label className="form-label fw-semibold">Description</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  name="description"
+                  value={formData.description}
+                  onChange={handleChange}
+                  placeholder="Enter transaction details"
+                  required
+                />
+              </div>
+
+              <div className="mb-3">
+                <label className="form-label fw-semibold">Category</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  name="category"
+                  value={formData.category}
+                  onChange={handleChange}
+                  placeholder="e.g. Office, Utilities, Sales"
+                />
+              </div>
+
+              <div className="row">
+                <div className="col-md-6 mb-3">
+                  <label className="form-label fw-semibold">Amount</label>
                   <input
                     type="number"
                     step="0.01"
-                    name="amount"
                     className="form-control"
+                    name="amount"
                     value={formData.amount}
                     onChange={handleChange}
                     required
                   />
                 </div>
 
-                <div className="col-12">
-                  <label className="form-label">Description</label>
-                  <input
-                    type="text"
-                    name="description"
-                    className="form-control"
-                    value={formData.description}
+                <div className="col-md-6 mb-3">
+                  <label className="form-label fw-semibold">Type</label>
+                  <select
+                    className="form-select"
+                    name="type"
+                    value={formData.type}
                     onChange={handleChange}
-                    required
-                  />
-                </div>
-
-                <div className="col-12 col-md-6">
-                  <label className="form-label">Category</label>
-                  <input
-                    type="text"
-                    name="category"
-                    className="form-control"
-                    value={formData.category}
-                    onChange={handleChange}
-                    placeholder="e.g. Office, Sales, Utilities"
-                  />
-                </div>
-
-                <div className="col-6 col-md-3">
-                  <label className="form-label">Type</label>
-                  <select name="type" className="form-select" value={formData.type} onChange={handleChange}>
+                  >
                     <option value="Credit">Credit</option>
                     <option value="Debit">Debit</option>
                   </select>
                 </div>
+              </div>
 
-                <div className="col-6 col-md-3">
-                  <label className="form-label">Status</label>
-                  <select name="status" className="form-select" value={formData.status} onChange={handleChange}>
-                    <option value="Pending">Pending</option>
-                    <option value="Completed">Completed</option>
-                  </select>
-                </div>
+              <div className="mb-3">
+                <label className="form-label fw-semibold">Status</label>
+                <select
+                  className="form-select"
+                  name="status"
+                  value={formData.status}
+                  onChange={handleChange}
+                >
+                  <option value="Pending">Pending</option>
+                  <option value="Completed">Completed</option>
+                </select>
               </div>
             </div>
 
-            <div className="modal-footer">
-              <button type="button" className="btn btn-secondary" onClick={onClose}>
+            {/* Footer */}
+            <div className="modal-footer d-flex justify-content-between bg-light sticky-bottom">
+              <button
+                type="button"
+                className="btn btn-outline-secondary"
+                onClick={onClose}
+              >
                 Cancel
               </button>
               <button type="submit" className="btn btn-primary">
