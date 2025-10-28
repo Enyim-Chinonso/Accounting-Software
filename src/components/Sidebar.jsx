@@ -19,11 +19,19 @@ export default function Sidebar({ onNavigate = () => {} }) {
     onNavigate(); // close sidebar on mobile
   };
 
+
   const handleLogout = () => {
-    // replace with real logout when you add auth
-    alert("Logout successful!");
-    router.push("/login");
-  };
+  alert("Logout successful!");
+  document.cookie = "isLoggedIn=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+  router.push("/");
+};
+
+
+  // const handleLogout = () => {
+  //   // replace with real logout when you add auth
+  //   alert("Logout successful!");
+  //   router.push("/login");
+  // };
 
   return (
     <nav className="sidebar d-flex flex-column justify-content-between h-100 p-3">

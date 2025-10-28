@@ -150,28 +150,28 @@ export default function ReportsPage() {
   const reports = [
     {
       id: 1,
-      month: "January",
+      month: "July",
       revenue: 5000,
       expenses: 3200,
       profit: 1800,
     },
     {
       id: 2,
-      month: "February",
+      month: "August",
       revenue: 6500,
       expenses: 4000,
       profit: 2500,
     },
     {
       id: 3,
-      month: "March",
+      month: "September",
       revenue: 7200,
       expenses: 4100,
       profit: 3100,
     },
     {
       id: 4,
-      month: "April",
+      month: "October",
       revenue: 8500,
       expenses: 5200,
       profit: 3300,

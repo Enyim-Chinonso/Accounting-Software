@@ -5,9 +5,9 @@ import { gsap } from "gsap";
 
 export default function SettingsPage() {
   const [formData, setFormData] = useState({
-    name: "SmartBook Admin",
-    email: "admin@smartbook.com",
-    phone: "+234 800 555 4444",
+    name: "Chinonso Admin",
+    email: "Chinonso@gmail.com",
+    phone: "+234 810 811 1761",
     currency: "USD",
     theme: "Light",
     notifications: true,
