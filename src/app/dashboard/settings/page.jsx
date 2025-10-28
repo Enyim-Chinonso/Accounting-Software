@@ -5,7 +5,7 @@ import { gsap } from "gsap";
 
 export default function SettingsPage() {
   const [formData, setFormData] = useState({
-    name: "Chinonso Admin",
+    name: "Chinonso Enyim",
     email: "Chinonso@gmail.com",
     phone: "+234 810 811 1761",
     currency: "USD",
