@@ -101,6 +101,20 @@ const router = useRouter();
        
       </section>
 
+
+       {/* ===== About Section ===== */}
+      <section id="about" className="container py-5 fade-up">
+        <div className="text-center">
+          <h2 className="fw-bold text-primary mb-3">About SmartBook</h2>
+          <p className="text-secondary mx-auto" style={{ maxWidth: "700px" }}>
+            SmartBook is a modern accounting and business management tool designed to simplify 
+            your daily financial operations. Our mission is to empower entrepreneurs, accountants, 
+            and business owners with clear insights and automation.
+          </p>
+        </div>
+      </section>
+
+
       {/* ===== Features Section ===== */}
       <section id="features" className="container py-5 fade-up">
         <h2 className="text-center fw-bold mb-5 text-primary">Features</h2>
@@ -183,18 +197,7 @@ const router = useRouter();
         </div>
       </section>
 
-      {/* ===== About Section ===== */}
-      <section id="about" className="container py-5 fade-up">
-        <div className="text-center">
-          <h2 className="fw-bold text-primary mb-3">About SmartBook</h2>
-          <p className="text-secondary mx-auto" style={{ maxWidth: "700px" }}>
-            SmartBook is a modern accounting and business management tool designed to simplify 
-            your daily financial operations. Our mission is to empower entrepreneurs, accountants, 
-            and business owners with clear insights and automation.
-          </p>
-        </div>
-      </section>
-
+     
       {/* ===== Footer ===== */}
 
       <footer className="bg-dark text-light py-5 text-center fade-up">
